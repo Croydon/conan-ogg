@@ -8,10 +8,10 @@ jobs:
       versionSpec: '3.6'
   - script: |
       pip install --upgrade pip
-      chmod +x .travis/install.sh
-      ./.travis/install.sh
-      chmod +x .travis/run.sh
-      ./.travis/run.sh
+      chmod +x .ci/install.sh
+      ./.ci/install.sh
+      chmod +x .ci/run.sh
+      ./.ci/run.sh
   strategy:
     matrix:
       GCC4.9:
