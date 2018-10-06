@@ -1,0 +1,19 @@
+jobs:
+- job: ${{ parameters.name }}
+  pool:
+    vmImage: ${{ parameters.vmImage }}
+  variables:
+    CONAN_APPLE_CLANG_VERSIONS: ${{ parameters.CONAN_APPLE_CLANG_VERSIONS }}
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.6'
+  #- task: Xcode@5
+    #inputs:
+      #xcodeVersion: ${{ parameters.xcodeVersion }}
+  - script: |
+      pip install --upgrade pip
+      chmod +x .travis/install.sh
+      ./.travis/install.sh
+      chmod +x .travis/run.sh
+      ./.travis/run.sh
