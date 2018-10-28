@@ -41,6 +41,9 @@ jobs:
       CLANG6.0:
         CONAN_CLANG_VERSIONS: 6.0
         CONAN_DOCKER_IMAGE: conanio/clang60
+      CLANG7.0:
+        CONAN_CLANG_VERSIONS: 7.0
+        CONAN_DOCKER_IMAGE: conanio/clang7
 - job: macOS
   pool:
     vmImage: 'macOS-10.13'
@@ -55,10 +58,14 @@ jobs:
   strategy:
     matrix:
       CLANG8.1:
+        CONAN_APPLE_CLANG_VERSIONS: 8.1
         xcodeVersion: 8.3.3
       CLANG9.0:
+        CONAN_APPLE_CLANG_VERSIONS: 9.0
         xcodeVersion: 9.2
       CLANG9.1:
+        CONAN_APPLE_CLANG_VERSIONS: 9.1
         xcodeVersion: 9.4.1
       CLANG10.0:
+        CONAN_APPLE_CLANG_VERSIONS: 10.0
         xcodeVersion: 10
