@@ -41,13 +41,24 @@ jobs:
       CLANG6.0:
         CONAN_CLANG_VERSIONS: 6.0
         CONAN_DOCKER_IMAGE: conanio/clang60
-
-# macOS doesn't work for now.
-# For macOS it is better to use Travis, as Azure Pipelines won't give you
-# the same huge range of xcode/apple-clang/macOS versions
-#- template: .ci/azure-pipelines-macos.template.yml
-  #parameters:
-    #name: 'macOS_CLANG10_0'
-    #vmImage: 'macOS-10.13'
-    #xcodeVersion: 10
-    #CONAN_APPLE_CLANG_VERSIONS: 10.0
+- job: macOS
+  pool:
+    vmImage: 'macOS-10.13'
+  steps:
+  - script: |
+      /bin/bash -c "sudo xcode-select -s /Applications/Xcode_$(xcodeVersion).app/Contents/Developer"
+      pip install --upgrade pip
+      chmod +x .ci/install.sh
+      ./.ci/install.sh
+      chmod +x .ci/run.sh
+      ./.ci/run.sh
+  strategy:
+    matrix:
+      CLANG8.1:
+        xcodeVersion: 8.3.3
+      CLANG9.0:
+        xcodeVersion: 9.2
+      CLANG9.1:
+        xcodeVersion: 9.4.1
+      CLANG10.0:
+        xcodeVersion: 10
